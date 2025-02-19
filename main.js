@@ -150,32 +150,22 @@ form.addEventListener('submit', function(e) {
 
     let valid = true
 
-    if(!harcertek) {
-        const parentElement = harc.parentElement; 
-        const errormsg = parentElement.querySelector('.error'); 
-        if (errormsg) { //ha az errormsg van akkor 
-            errormsg.innerHTML = "Kötelező a harcot kitölteni"; //legyen a megadott uzenetünk az
+    function alapcheck(ertek, uzenet) {
+        if (!ertek.value) { 
+            valid = false
+            const parentElement = ertek.parentElement; 
+            const errormsg = parentElement.querySelector('.error'); 
+            if (errormsg) { //ha az errormsg van akkor 
+                errormsg.innerHTML = uzenet; //legyen a megadott uzenetünk az
+            }
         }
-        valid = false
     }
-
-    if(!fel1ertek) {
-        const parentElement = fel1.parentElement; 
-        const errormsg = parentElement.querySelector('.error'); 
-        if (errormsg) { //ha az errormsg van akkor 
-            errormsg.innerHTML = "Kötelező a felet kitölteni"; //legyen a megadott uzenetünk az
-        }
-        valid = false
-    }
-
-    if(!had1ertek) {
-        const parentElement = had1.parentElement; 
-        const errormsg = parentElement.querySelector('.error'); 
-        if (errormsg) { //ha az errormsg van akkor 
-            errormsg.innerHTML = "Kötelező a hadierőt kitölteni"; //legyen a megadott uzenetünk az
-        }
-        valid = false
-    }
+    
+    alapcheck(harc, "Add meg a harc nevét") 
+    alapcheck(fel1, "Add meg az egyik fél nevéts") 
+    alapcheck(had1, "Add meg az első fél had erejét") 
+    
+ 
 
     form.reset()
 
