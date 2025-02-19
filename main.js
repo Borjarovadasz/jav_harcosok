@@ -76,9 +76,9 @@ function genertaheader(arrayobj, sor) {
 
 genertaheader(fejlec,tr)
 
-function tablegenerate() {
+function tablegenerate(arrayobjek, bodytest) {
 
-    for(let adat of array) {
+    for(let adat of arrayobjek) {
 
         const tr = document.createElement('tr')
 
@@ -86,7 +86,7 @@ function tablegenerate() {
         elsocella.innerHTML = adat.harc
         tr.appendChild(elsocella)
 
-        tbody.appendChild(tr)
+        bodytest.appendChild(tr)
 
         if(adat.fel2 && adat.had2) {
             elsocella.rowSpan = 2
@@ -117,15 +117,14 @@ function tablegenerate() {
 
 
 
-            tbody.appendChild(masiksor)
+            bodytest.appendChild(masiksor)
         }
 
 
 
     }
 }
-
-tablegenerate()
+tablegenerate(array, tbody)
 
 const form = document.getElementById('form')
 
