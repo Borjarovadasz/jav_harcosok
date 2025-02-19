@@ -151,6 +151,7 @@ form.addEventListener('submit', function(e) {
     let valid = true
 
     function alapcheck(ertek, uzenet) {
+        let jo = true
         if (!ertek.value) { 
             valid = false
             const parentElement = ertek.parentElement; 
@@ -158,19 +159,43 @@ form.addEventListener('submit', function(e) {
             if (errormsg) { //ha az errormsg van akkor 
                 errormsg.innerHTML = uzenet; //legyen a megadott uzenetünk az
             }
+            jo = false
         }
+        return jo
     }
     
-    alapcheck(harc, "Add meg a harc nevét") 
-    alapcheck(fel1, "Add meg az egyik fél nevéts") 
-    alapcheck(had1, "Add meg az első fél had erejét") 
+  
     
- 
+
+    const valid1 = alapcheck(harc, "Add meg a harc nevét") 
+    const valid2 = alapcheck(fel1, "Add meg az egyik fél nevéts") 
+    const valid3 = alapcheck(had1, "Add meg az első fél had erejét") 
+  
+    if(!had2ertek && fel2ertek) {
+        const parentElement = had2.parentElement; 
+        const errormsg = parentElement.querySelector('.error'); 
+        if (errormsg) { //ha az errormsg van akkor 
+            errormsg.innerHTML = "Kötelező a szerzőművet kitölteni"; //legyen a megadott uzenetünk az
+
+        }
+        valid = false
+    }
+
+
+    if(had2ertek && !fel2ertek) {
+        const parentElement = fel2.parentElement; 
+        const errormsg = parentElement.querySelector('.error'); 
+        if (errormsg) { //ha az errormsg van akkor 
+            errormsg.innerHTML = "Kötelező a szerzőművet kitölteni"; //legyen a megadott uzenetünk az
+
+        }
+        valid = false
+
+    }
 
     form.reset()
 
-
-    if(valid) {
+    if(valid1 && valid2 && valid3 && valid) {
         const ujadat = { // egy uj objektumot hozunk létre 
             harc: harcertek, // az uj fizikateruletnek a teruletertek lesz az értéke
             fel1 : fel1ertek, // az idoszaknak az idoszakerteke lesz az értéke
