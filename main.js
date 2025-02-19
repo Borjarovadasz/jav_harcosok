@@ -170,32 +170,32 @@ form.addEventListener('submit', function(e) {
     const valid1 = alapcheck(harc, "Add meg a harc nevét") 
     const valid2 = alapcheck(fel1, "Add meg az egyik fél nevéts") 
     const valid3 = alapcheck(had1, "Add meg az első fél had erejét") 
+    const valid4 = optionalcheck(fel2,had2, "Kérlek add meg a harcoló felet ha megadtál haderőt")
+    const valid5 = optionalcheck(had2,fel2, "Kérlek add meg a harcoló fél haderejét")
+
+
   
-    if(!had2ertek && fel2ertek) {
-        const parentElement = had2.parentElement; 
-        const errormsg = parentElement.querySelector('.error'); 
-        if (errormsg) { //ha az errormsg van akkor 
-            errormsg.innerHTML = "Kötelező a szerzőművet kitölteni"; //legyen a megadott uzenetünk az
-
+    function optionalcheck(ertek, ertek2, uzenet) {
+        let jo = true //csinálunk egy jo változót aminek az értéke true lesz
+        if (!ertek.value && ertek2.value) {  //hogyha az egyik bejővő érték undefined vagy "" és a másik pedig létezik
+            valid = false //akkor legyen valid false
+            const parentElement = ertek.parentElement;  //megnézzük a parentelementjét a bejövő HTMLELEMENT-nek
+            const errormsg = parentElement.querySelector('.error');   //megnézzük hogy van benne olyan element aminek a class-ja error.
+            if (errormsg) { //ha az errormsg van akkor 
+                errormsg.innerHTML = uzenet; //legyen a megadott uzenetünk az
+            }
+            jo = false //hogyha hibás akkor legyen false a jó és akkor nem adjuk hozzá az adatokat
         }
-        valid = false
+        return jo //visszatérunk a jó változó értékkel (ami amúgy true)
+    
     }
 
 
-    if(had2ertek && !fel2ertek) {
-        const parentElement = fel2.parentElement; 
-        const errormsg = parentElement.querySelector('.error'); 
-        if (errormsg) { //ha az errormsg van akkor 
-            errormsg.innerHTML = "Kötelező a szerzőművet kitölteni"; //legyen a megadott uzenetünk az
-
-        }
-        valid = false
-
-    }
-
+  
+    
     form.reset()
 
-    if(valid1 && valid2 && valid3 && valid) {
+    if(valid1 && valid2 && valid3 && valid4 && valid5) {
         const ujadat = { // egy uj objektumot hozunk létre 
             harc: harcertek, // az uj fizikateruletnek a teruletertek lesz az értéke
             fel1 : fel1ertek, // az idoszaknak az idoszakerteke lesz az értéke
