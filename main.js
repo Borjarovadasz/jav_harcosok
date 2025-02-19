@@ -53,11 +53,12 @@ const thead = document.createElement('thead')
 const tbody = document.createElement('tbody')
 
 const tr = document.createElement("tr")
-thead.appendChild(tr)
+
 tablazat.appendChild(thead)
 
 
 tablazat.appendChild(tbody)
+thead.appendChild(tr)
 
 document.body.appendChild(tablazat)
 
@@ -122,7 +123,7 @@ function tablegenerate() {
 
 tablegenerate()
 
-const form = document.createElement('form')
+const form = document.getElementById('form')
 
 form.addEventListener('submit', function(e) {
 
