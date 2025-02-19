@@ -62,15 +62,19 @@ thead.appendChild(tr)
 
 document.body.appendChild(tablazat)
 
+function genertaheader(arrayobj, sor) {
+    for(adat of arrayobj) {
 
-for(adat of fejlec) {
-
-    const th = document.createElement('th')
-    th.innerHTML = adat.szoveg
-
-    tr.appendChild(th)
+        const th = document.createElement('th')
+        th.innerHTML = adat.szoveg
+    
+        sor.appendChild(th)
+    }
+    
 }
 
+
+genertaheader(fejlec,tr)
 
 function tablegenerate() {
 
