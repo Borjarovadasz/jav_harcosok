@@ -46,7 +46,38 @@ const fejlec  = //létrehozunk egy fejléc arrayt objektumokkal
 
     ]
 
-
+    const formarray = [
+        
+        { //elso obj
+            label: "Harc megnevezése::",
+            id: "harc_nev",
+            for: "harc_nev"
+        },
+        
+        { //masodik obj
+            label: "1. Harcoló fél:",
+            id: "harcolo1",
+            for: "harcolo1"
+        },
+        
+        { //harmadik obj
+            label: "1. Haderő:",
+            id: "hadero1",
+            for: "hadero1"
+        },
+        
+        { //negyedik obj
+            label: "2. Harcoló fél:",
+            id: "harcolo2",
+            for: "harcolo2"
+        },
+        
+        { //otodik objs
+            label: "2. Haderő:",
+            id: "hadero2",
+            for: "hadero2"
+        }
+    ]
 
 const tablazat = document.createElement('table')
 const thead = document.createElement('thead')
@@ -75,6 +106,45 @@ function genertaheader(arrayobj, sor) {
 
 
 genertaheader(fejlec,tr)
+
+function formgenerate(arryform) {
+
+    const form = document.createElement('form') //létrehozunk egy formot
+    form.id = "form" //form idje legyen form
+    form.action = "#"
+
+    for(let i = 0; i < arryform.length; i++) {//végigiterálunk a formon
+
+        const div = document.createElement('div') //csinálnuk egy div-et
+        const label = document.createElement('label') //csinálunk egy label-t
+        const input = document.createElement('input') //csinálnuk egy input-ot
+        const br = document.createElement('br') //csinálunk egy br-t
+
+        label.innerHTML = arryform[i].label //a labelnek az innerhtmlje legyen az adott indexnél található label az arrayünkben
+        label.htmlFor = arryform[i].for//a labelnek az for-ja legyen az adott indexnél található for az arrayünkben
+        input.type = "text" //input typja legyen text
+        input.id = arryform[i].id //input idja legyen az adott id az arrayünkben
+        input.name = arryform[i].id  //input neve legyen az adott id az arrayünkben
+
+        const errordiv = document.createElement('div') //csinálunk egy errodivet
+        errordiv.className = "error" //ennek a divnek a classneve legyen error
+
+        div.appendChild(label)
+        div.appendChild(br)
+        div.appendChild(input)
+        div.appendChild(errordiv)
+
+        form.appendChild(div)
+    } 
+    
+    
+    const button = document.createElement('button')
+    button.innerHTML  = "Hozzáadás"
+    document.body.appendChild(form)
+    form.appendChild(button)
+}
+formgenerate(formarray)
+
 
 function tablegenerate(arrayobjek, bodytest) {
 
@@ -125,6 +195,8 @@ function tablegenerate(arrayobjek, bodytest) {
     }
 }
 tablegenerate(array, tbody)
+
+
 
 const form = document.getElementById('form')
 
@@ -211,7 +283,7 @@ form.addEventListener('submit', function(e) {
         array.push(ujadat)
         tbody.innerHTML = ""
     
-        tablegenerate()
+        tablegenerate(array, tbody)
     }
     
 
